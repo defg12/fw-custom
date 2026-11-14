@@ -1,46 +1,46 @@
 pins:
   # Analog Inputs (Strictly 0-3.0V max on SkyStar PRO; PA4-PA7 excluded)
-  - id: A0
+  - id: EFI_ADC_0
     class: analog_inputs
     ts_name: CLT (PA0)
   
-  - id: A1
+  - id: EFI_ADC_1
     class: analog_inputs
     ts_name: TPS (PA1)
   
-  - id: A2
+  - id: EFI_ADC_2
     class: analog_inputs
     ts_name: Oil Press (PA2)
   
-  - id: A3
+  - id: EFI_ADC_3
     class: analog_inputs
     ts_name: MAP (PA3)
   
-  - id: B0
+  - id: EFI_ADC_8
     class: analog_inputs
     ts_name: VBatt (PB0)
   
-  - id: B1
+  - id: EFI_ADC_9
     class: analog_inputs
     ts_name: Aux ADC (PB1)
   
-  - id: C0
+  - id: EFI_ADC_10
     class: analog_inputs
     ts_name: Aux ADC (PC0)
   
-  - id: C1
+  - id: EFI_ADC_11
     class: analog_inputs
     ts_name: Aux ADC (PC1)
   
-  - id: C2
+  - id: EFI_ADC_12
     class: analog_inputs
     ts_name: Aux ADC (PC2)
   
-  - id: C4
+  - id: EFI_ADC_14
     class: analog_inputs
     ts_name: Lambda (PC4)
   
-  - id: C5
+  - id: EFI_ADC_15
     class: analog_inputs
     ts_name: IAT (PC5)
   
