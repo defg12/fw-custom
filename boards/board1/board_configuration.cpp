@@ -13,7 +13,7 @@ Gpio getWarningLedPin() {
 	return Gpio::Unassigned;
 }
 
-void setupBoardHardwareTestOverrides();
+//void setupBoardHardwareTestOverrides();
 
 static void customBoardInitHardware() {
     /* Configure SkyStar microSD slot pins for 4-bit SDIO (AF12) */
@@ -94,7 +94,7 @@ static void customBoardDefaultConfiguration() {
 }
 
 void setup_custom_board_overrides() {
-    setupBoardHardwareTestOverrides();
+    //setupBoardHardwareTestOverrides();
     custom_board_InitHardware = customBoardInitHardware;
     custom_board_ConfigOverrides = customBoardConfigOverrides;
     custom_board_DefaultConfiguration = customBoardDefaultConfiguration;
