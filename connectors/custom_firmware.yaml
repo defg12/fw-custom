@@ -38,7 +38,7 @@ pins:
   
   - id: C4
     class: analog_inputs
-    ts_name: Aux ADC (PC4)
+    ts_name: Lambda (PC4)
   
   - id: C5
     class: analog_inputs
@@ -63,84 +63,76 @@ pins:
     
   - id: [E0, E0]
     class: [switch_inputs, event_inputs]
-    ts_name: Input 5 (PE0)
+    ts_name: HALL (PE0)
 
   - id: [E1, E1]
     class: [switch_inputs, event_inputs]
-    ts_name: Input 6 (PE1)
+    ts_name: VR (PE1)
   
 # General Outputs
-  - id: D8
+  - id: D7
     class: outputs
-    ts_name: Coil 1 (PD8)
+    ts_name: ETB Direction (PD7)
 
-  - id: D9
-    class: outputs
-    ts_name: Coil 2 (PD9)
-  
-  - id: D10
-    class: outputs
-    ts_name: Coil 3 (PD10)
-  
-  - id: D11
-    class: outputs
-    ts_name: Coil 4 (PD11)
-  
   - id: D12
     class: outputs
-    ts_name: Fuel Pump (PD12)
+    ts_name: Coil 1 (PD12)
   
   - id: D13
     class: outputs
-    ts_name: Fan (PD13)
+    ts_name: Coil 2 (PD13)
   
   - id: D14
     class: outputs
-    ts_name: Idle (PD14)
+    ts_name: Coil 3 (PD14)
   
   - id: D15
     class: outputs
-    ts_name: Tach (PD15)
-  
-  - id: E7
+    ts_name: Coil 4 (PD15)
+
+  - id: E2
     class: outputs
-    ts_name: Boost (PE7)
-  
-  - id: E8
+    ts_name: Boost (PE2)
+
+  - id: E3
     class: outputs
-    ts_name: Aux Out (PE8)
+    ts_name: Lambda Heater (PE3)
+
+  - id: E4
+    class: outputs
+    ts_name: OUT 1 (PE4)
+  
+  - id: E5
+    class: outputs
+    ts_name: Fuel Pump (PE5)
+
+  - id: E6
+    class: outputs
+    ts_name: Fan (PE9)
   
   - id: E9
     class: outputs
     ts_name: Injector 1 (PE9)
   
-  - id: E10
-    class: outputs
-    ts_name: Aux Out (PE10)
-  
   - id: E11
     class: outputs
     ts_name: Injector 2 (PE11)
   
-  - id: E12
-    class: outputs
-    ts_name: Aux Out (PE12)
-  
   - id: E13
     class: outputs
     ts_name: Injector 3 (PE13)
-  
+    
   - id: E14
     class: outputs
     ts_name: Injector 4 (PE14)
-  
-  - id: E15
+ 
+  - id: B4
     class: outputs
-    ts_name: Aux Out (PE15)
-  
-  - id: B10
+    ts_name: ETB Pwm (PB4)
+
+  - id: B6
     class: outputs
-    ts_name: Aux Out (PB10)
+    ts_name: ETB Disable (PB6)
   
   - id: B11
     class: outputs
@@ -149,10 +141,6 @@ pins:
   - id: B12
     class: outputs
     ts_name: Aux Out (PB12)
-  
-  - id: B13
-    class: outputs
-    ts_name: Aux Out (PB13)
   
   - id: B15
     class: outputs
