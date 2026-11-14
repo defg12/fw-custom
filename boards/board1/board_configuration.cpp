@@ -45,21 +45,21 @@ static void customBoardDefaultConfiguration() {
     }
 
     /* 2. Crank & Cam Trigger Inputs */
-    engineConfiguration->triggerInputPins[0] = Gpio::B5;         // Primary crank trigger
-    engineConfiguration->triggerInputPins[1] = Gpio::Unassigned; // Secondary crank trigger
-    engineConfiguration->camInputs[0] = Gpio::B7;                // Primary cam trigger
+    //engineConfiguration->triggerInputPins[0] = Gpio::B5;         // Primary crank trigger
+    //engineConfiguration->triggerInputPins[1] = Gpio::Unassigned; // Secondary crank trigger
+    //engineConfiguration->camInputs[0] = Gpio::B7;                // Primary cam trigger
 
     /* 3. Injector Outputs (Cylinders 1-4) */
-    engineConfiguration->injectionPins[0] = Gpio::E9;
-    engineConfiguration->injectionPins[1] = Gpio::E11;
-    engineConfiguration->injectionPins[2] = Gpio::E13;
-    engineConfiguration->injectionPins[3] = Gpio::E14;
+    //engineConfiguration->injectionPins[0] = Gpio::E9;
+    //engineConfiguration->injectionPins[1] = Gpio::E11;
+    //engineConfiguration->injectionPins[2] = Gpio::E13;
+    //engineConfiguration->injectionPins[3] = Gpio::E14;
 
     /* 4. Ignition Coil Outputs (Cylinders 1-4) */
-    engineConfiguration->ignitionPins[0] = Gpio::D8;
-    engineConfiguration->ignitionPins[1] = Gpio::D9;
-    engineConfiguration->ignitionPins[2] = Gpio::D10;
-    engineConfiguration->ignitionPins[3] = Gpio::D11;
+    //engineConfiguration->ignitionPins[0] = Gpio::D8;
+    //engineConfiguration->ignitionPins[1] = Gpio::D9;
+    //engineConfiguration->ignitionPins[2] = Gpio::D10;
+    //engineConfiguration->ignitionPins[3] = Gpio::D11;
 
     /* 6. Analog Sensors (Strictly 0-3.0V max on SkyStar PRO) */
     engineConfiguration->clt.adcChannel = EFI_ADC_0;        // PA0
