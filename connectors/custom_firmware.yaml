@@ -3,7 +3,7 @@ pins:
   - id: A0
     class: analog_inputs
     ts_name: CLT (PA0)
-
+  
   - id: A1
     class: analog_inputs
     ts_name: TPS (PA1)
@@ -43,7 +43,7 @@ pins:
   - id: C5
     class: analog_inputs
     ts_name: IAT (PC5)
-
+  
   # Digital Switch & Trigger / Event Inputs (Only E0, E1, B9, C3, B5, B7)
   - id: [B5, B5]
     class: [switch_inputs, event_inputs]
@@ -52,7 +52,7 @@ pins:
   - id: [B7, B7]
     class: [switch_inputs, event_inputs]
     ts_name: Input 2 (PB7)
-
+  
   - id: [B9, B9]
     class: [switch_inputs, event_inputs]
     ts_name: Input 3 (PB9)
@@ -64,16 +64,16 @@ pins:
   - id: [E0, E0]
     class: [switch_inputs, event_inputs]
     ts_name: HALL (PE0)
-
+  
   - id: [E1, E1]
     class: [switch_inputs, event_inputs]
     ts_name: VR (PE1)
   
-# General Outputs
+  # General Outputs
   - id: D7
     class: outputs
     ts_name: ETB Direction (PD7)
-
+  
   - id: D12
     class: outputs
     ts_name: Coil 1 (PD12)
@@ -89,15 +89,15 @@ pins:
   - id: D15
     class: outputs
     ts_name: Coil 4 (PD15)
-
+  
   - id: E2
     class: outputs
     ts_name: Boost (PE2)
-
+  
   - id: E3
     class: outputs
     ts_name: Lambda Heater (PE3)
-
+  
   - id: E4
     class: outputs
     ts_name: OUT 1 (PE4)
@@ -105,7 +105,7 @@ pins:
   - id: E5
     class: outputs
     ts_name: Fuel Pump (PE5)
-
+  
   - id: E6
     class: outputs
     ts_name: Fan (PE9)
@@ -125,11 +125,11 @@ pins:
   - id: E14
     class: outputs
     ts_name: Injector 4 (PE14)
- 
+  
   - id: B4
     class: outputs
     ts_name: ETB Pwm (PB4)
-
+  
   - id: B6
     class: outputs
     ts_name: ETB Disable (PB6)
@@ -145,7 +145,7 @@ pins:
   - id: B15
     class: outputs
     ts_name: Aux Out (PB15)
-
+  
 info:
   title: SkyStar STM32F407 Pro
   name: SkyStar Headers
