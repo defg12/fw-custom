@@ -30,7 +30,7 @@ static void customBoardConfigOverrides() {
     engineConfiguration->adcVcc = 3.0f;
 
     /* Enable SD Card via 4-bit SDIO */
-    engineConfiguration->isSdCardEnabled = true;
+    engineConfiguration->isSdCardEnabled = false;
     engineConfiguration->sdCardCsPin = Gpio::Unassigned;
     engineConfiguration->sdCardSpiDevice = SPI_NONE;
 }
