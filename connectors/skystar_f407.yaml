@@ -149,3 +149,5 @@ pins:
 info:
   title: SkyStar STM32F407 Pro
   name: SkyStar Headers
+  cid: skystar_f407
+  directory: skystar_f407
