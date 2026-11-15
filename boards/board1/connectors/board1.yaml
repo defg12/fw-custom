@@ -17,10 +17,6 @@ pins:
     class: analog_inputs
     ts_name: MAP (PA3)
   
-  - id: EFI_ADC_8
-    class: analog_inputs
-    ts_name: VBatt (PB0)
-  
   - id: EFI_ADC_9
     class: analog_inputs
     ts_name: Aux ADC (PB1)
