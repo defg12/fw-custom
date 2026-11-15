@@ -39,6 +39,16 @@ static void customBoardConfigOverrides() {
     engineConfiguration->isSdCardEnabled = true;
     engineConfiguration->sdCardCsPin = Gpio::Unassigned;
     engineConfiguration->sdCardSpiDevice = SPI_NONE;
+
+	/* Hardcode PB5 (Cam / VR trigger input) on every boot */
+    engineConfiguration->triggerInputPins = Gpio::B5; // Primary crank trigger  (PB4)
+    engineConfiguration->triggerInputPins = Gpio::Unassigned;
+
+    /* Hardcode ETB H-Bridge pins on every boot (Dir + PWM + Disable) */
+    engineConfiguration->etbIo[0].directionPin1 = Gpio::D7; // ETB Direction (PD7)
+    engineConfiguration->etbIo[0].controlPin1 = Gpio::C6;   // ETB PWM (PC6)
+    engineConfiguration->etbIo[0].disablePin = Gpio::B6;    // ETB Disable (PB6)
+    engineConfiguration->etb_use_two_wires = false;
 }
 
 static void setDefaultIgnitionPins() {
@@ -64,31 +74,23 @@ static void setDefaultInjectorPins() {
     engineConfiguration->injectionPins[3] = Gpio::E14; // Injector 4 (PE14)
 }
 
-static void setDefaultEtbPins() {
-    engineConfiguration->etbIo[0].directionPin1 = Gpio::D7; // ETB Direction (PD7)
-    engineConfiguration->etbIo[0].controlPin = Gpio::B4;  // ETB PWM (PB4)
-    engineConfiguration->etbIo[0].disablePin = Gpio::B6;  // ETB Enable/Disable (PB6)
-    engineConfiguration->etb_use_two_wires = false;
-}
-
 static void customBoardDefaultConfiguration() {
     setDefaultIgnitionPins();
     setDefaultInjectorPins();
-    setDefaultEtbPins();
-
+	
 	engineConfiguration->useMetricOnInterface = true;
 	
     /* Crank & Cam Trigger Inputs */
-    engineConfiguration->triggerInputPins[0] = Gpio::B5;         // Primary crank trigger
-    engineConfiguration->triggerInputPins[1] = Gpio::Unassigned; // Secondary crank trigger
-    engineConfiguration->camInputs[0] = Gpio::B7;                // Primary cam trigger
+    engineConfiguration->camInputs[0] = Gpio::B4;           // Primary cam trigger
 	
     /* Analog Sensors (Strictly 0-3.0V max on SkyStar PRO) */
     engineConfiguration->clt.adcChannel = EFI_ADC_0;        // PA0
     engineConfiguration->tps1_1AdcChannel = EFI_ADC_1;      // PA1
     engineConfiguration->oilPressure.hwChannel = EFI_ADC_2; // PA2
     engineConfiguration->map.sensor.hwChannel = EFI_ADC_3;  // PA3
+	engineConfiguration->auxLinear1.hwChannel = EFI_ADC_9;  //PB1
     engineConfiguration->auxTempSensor1.adcChannel = EFI_ADC_10; // PC0
+	engineConfiguration->auxLinear2.hwChannel = EFI_ADC_11;
 	engineConfiguration->auxTempSensor2.adcChannel = EFI_ADC_12; // PC2
 	engineConfiguration->iat.adcChannel = EFI_ADC_15;       // PC5
 
@@ -103,7 +105,17 @@ static void customBoardDefaultConfiguration() {
     engineConfiguration->oilPressure.v2 = 2.70f;
     engineConfiguration->oilPressure.value2 = 689.48f;
 
-    /* 8. CAN Bus (CAN1 on PD0 / PD1, CAN2 disabled) */
+	engineConfiguration->auxLinear1.v1 = 0.50f;            // Sensor voltage at low end
+    engineConfiguration->auxLinear1.value1 = 0.0f;         // Pressure in kPa at v1
+    engineConfiguration->auxLinear1.v2 = 4.50f;            // Sensor voltage at high end
+    engineConfiguration->auxLinear1.value2 = 1000.0f;      // Pressure in kPa at v2 (10 bar)
+
+	engineConfiguration->auxLinear2.v1 = 0.50f;            // Sensor voltage at low end
+    engineConfiguration->auxLinear2.value1 = 0.0f;         // Pressure in kPa at v1
+    engineConfiguration->auxLinear2.v2 = 4.50f;            // Sensor voltage at high end
+    engineConfiguration->auxLinear2.value2 = 1000.0f;      // Pressure in kPa at v2 (10 bar)
+    
+	/* 8. CAN Bus (CAN1 on PD0 / PD1, CAN2 disabled) */
     engineConfiguration->canRxPin = Gpio::D0;
     engineConfiguration->canTxPin = Gpio::D1;
     engineConfiguration->can2RxPin = Gpio::Unassigned;
