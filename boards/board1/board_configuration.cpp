@@ -76,6 +76,8 @@ static void customBoardDefaultConfiguration() {
     setDefaultInjectorPins();
     setDefaultEtbPins();
 
+	engineConfiguration->useMetricOnInterface = true;
+	
     /* Crank & Cam Trigger Inputs */
     engineConfiguration->triggerInputPins[0] = Gpio::B5;         // Primary crank trigger
     engineConfiguration->triggerInputPins[1] = Gpio::Unassigned; // Secondary crank trigger
