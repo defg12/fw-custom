@@ -48,19 +48,19 @@ pins:
   
   - id: [B8, B8]
     class: [switch_inputs, event_inputs]
-    ts_name: Input 1 (PB8)
+    ts_name: Input 1 (10nF PB8))
   
   - id: [B9, B9]
     class: [switch_inputs, event_inputs]
-    ts_name: Input 2 (PB9)
+    ts_name: Input 2 (1nF (PB9))
     
   - id: [E0, E0]
     class: [switch_inputs, event_inputs]
-    ts_name: Input 3 (PE0)
+    ts_name: Launch (PE0)
   
   - id: [E1, E1]
     class: [switch_inputs, event_inputs]
-    ts_name: Input 4 (PE1)
+    ts_name: Map switch (PE1)
   
   # General Outputs
   - id: D12
@@ -85,19 +85,19 @@ pins:
   
   - id: E3
     class: outputs
-    ts_name: Lambda Heater (PE3)
+    ts_name: Fuel Pump (Diode (PE3)) 
   
   - id: E4
     class: outputs
-    ts_name: Aux Out 1 (PE4)
+    ts_name: VVT (PE4)
   
   - id: E5
     class: outputs
-    ts_name: Fuel Pump (PE5)
+    ts_name: Tacho Pullup 12v (PE5)
   
   - id: E6
     class: outputs
-    ts_name: Fan (PE6)
+    ts_name: O2 Heater (PE6)
   
   - id: E9
     class: outputs
@@ -117,15 +117,15 @@ pins:
   
   - id: B11
     class: outputs
-    ts_name: Aux Out 2 (PB11)
+    ts_name: Aux Out 1 (PB11)
   
   - id: B12
     class: outputs
-    ts_name: Aux Out 3 (PB12)
+    ts_name: Aux Out 2 (PB12)
   
   - id: B15
     class: outputs
-    ts_name: Aux Out 4 (PB15)
+    ts_name: Fan (Diode (PB15))
   
 info:
   title: SkyStar STM32F407 Pro
