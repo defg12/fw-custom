@@ -16,6 +16,10 @@ Gpio getWarningLedPin() {
 //void setupBoardHardwareTestOverrides();
 
 static void customBoardInitHardware() {
+    /* Keep external SPI flash chip disabled (PA4 /CS = HIGH) */
+    efiSetPadMode("External Flash CS", Gpio::A4, PAL_MODE_OUTPUT_PUSHPULL);
+    palSetPad(GPIOA, 4);
+
     /* Configure SkyStar microSD slot pins for 4-bit SDIO (AF12) */
     palSetPadMode(GPIOC, 8,  PAL_MODE_ALTERNATE(12) | PAL_STM32_OSPEED_HIGHEST | PAL_STM32_PUPDR_PULLUP);
     palSetPadMode(GPIOC, 9,  PAL_MODE_ALTERNATE(12) | PAL_STM32_OSPEED_HIGHEST | PAL_STM32_PUPDR_PULLUP);
@@ -28,54 +32,70 @@ static void customBoardInitHardware() {
 static void customBoardConfigOverrides() {
     /* Force SkyStar PRO REF3030 3.00V precision ADC reference */
     engineConfiguration->adcVcc = 3.0f;
-
+    engineConfiguration->vbattAdcChannel = EFI_ADC_8; // PB0
+	engineConfiguration->vbattDividerCoeff = 11.0f;
+	
     /* Enable SD Card via 4-bit SDIO */
-    engineConfiguration->isSdCardEnabled = false;
+    engineConfiguration->isSdCardEnabled = true;
     engineConfiguration->sdCardCsPin = Gpio::Unassigned;
     engineConfiguration->sdCardSpiDevice = SPI_NONE;
 }
 
-static void customBoardDefaultConfiguration() {
-    /* 1. Clear All Default Injector & Ignition Pins First */
-    for (size_t i = 0; i < efi::size(engineConfiguration->injectionPins); i++) {
-        engineConfiguration->injectionPins[i] = Gpio::Unassigned;
-    }
+static void setDefaultIgnitionPins() {
     for (size_t i = 0; i < efi::size(engineConfiguration->ignitionPins); i++) {
         engineConfiguration->ignitionPins[i] = Gpio::Unassigned;
     }
 
-    /* 2. Crank & Cam Trigger Inputs */
-    //engineConfiguration->triggerInputPins[0] = Gpio::B5;         // Primary crank trigger
-    //engineConfiguration->triggerInputPins[1] = Gpio::Unassigned; // Secondary crank trigger
-    //engineConfiguration->camInputs[0] = Gpio::B7;                // Primary cam trigger
+    engineConfiguration->ignitionPins[0] = Gpio::D12; // Coil 1 (PD12)
+    engineConfiguration->ignitionPins[1] = Gpio::D13; // Coil 2 (PD13)
+    engineConfiguration->ignitionPins[2] = Gpio::D14; // Coil 3 (PD14)
+    engineConfiguration->ignitionPins[3] = Gpio::D15; // Coil 4 (PD15)
+}
 
-    /* 3. Injector Outputs (Cylinders 1-4) */
-    //engineConfiguration->injectionPins[0] = Gpio::E9;
-    //engineConfiguration->injectionPins[1] = Gpio::E11;
-    //engineConfiguration->injectionPins[2] = Gpio::E13;
-    //engineConfiguration->injectionPins[3] = Gpio::E14;
+/* Helper: Clear and assign Injector outputs */
+static void setDefaultInjectorPins() {
+    for (size_t i = 0; i < efi::size(engineConfiguration->injectionPins); i++) {
+        engineConfiguration->injectionPins[i] = Gpio::Unassigned;
+    }
 
-    /* 4. Ignition Coil Outputs (Cylinders 1-4) */
-    //engineConfiguration->ignitionPins[0] = Gpio::D8;
-    //engineConfiguration->ignitionPins[1] = Gpio::D9;
-    //engineConfiguration->ignitionPins[2] = Gpio::D10;
-    //engineConfiguration->ignitionPins[3] = Gpio::D11;
+    engineConfiguration->injectionPins[0] = Gpio::E9; // Injector 1 (PE9)
+    engineConfiguration->injectionPins[1] = Gpio::E11; // Injector 2 (PE11)
+    engineConfiguration->injectionPins[2] = Gpio::E13; // Injector 3 (PE13)
+    engineConfiguration->injectionPins[3] = Gpio::E14; // Injector 4 (PE14)
+}
 
-    /* 6. Analog Sensors (Strictly 0-3.0V max on SkyStar PRO) */
+static void setDefaultEtbPins() {
+    engineConfiguration->etbIo[0].directionPin1 = Gpio::D7; // ETB Direction (PD7)
+    engineConfiguration->etbIo[0].controlPin1 = Gpio::B4;  // ETB PWM (PB4)
+    engineConfiguration->etbIo[0].disablePin = Gpio::B6;  // ETB Enable/Disable (PB6)
+    engineConfiguration->etb_use_two_wires = false;
+}
+
+static void customBoardDefaultConfiguration() {
+    setDefaultIgnitionPins();
+    setDefaultInjectorPins();
+    setDefaultEtbPins();
+
+    /* Crank & Cam Trigger Inputs */
+    engineConfiguration->triggerInputPins[0] = Gpio::B5;         // Primary crank trigger
+    engineConfiguration->triggerInputPins[1] = Gpio::Unassigned; // Secondary crank trigger
+    engineConfiguration->camInputs[0] = Gpio::B7;                // Primary cam trigger
+	
+    /* Analog Sensors (Strictly 0-3.0V max on SkyStar PRO) */
     engineConfiguration->clt.adcChannel = EFI_ADC_0;        // PA0
     engineConfiguration->tps1_1AdcChannel = EFI_ADC_1;      // PA1
     engineConfiguration->oilPressure.hwChannel = EFI_ADC_2; // PA2
     engineConfiguration->map.sensor.hwChannel = EFI_ADC_3;  // PA3
-    engineConfiguration->vbattAdcChannel = EFI_ADC_8;       // PB0
-    engineConfiguration->iat.adcChannel = EFI_ADC_15;       // PC5
+    engineConfiguration->auxTempSensor1.adcChannel = EFI_ADC_10; // PC0
+	engineConfiguration->auxTempSensor2.adcChannel = EFI_ADC_12; // PC2
+	engineConfiguration->iat.adcChannel = EFI_ADC_15;       // PC5
 
-    /* 7. Analog Scaling, Oil Pressure & Thermistor Pull-Ups */
-    engineConfiguration->adcVcc = 3.0f;
-    engineConfiguration->analogInputDividerCoefficient = 1.6667f;
-    engineConfiguration->vbattDividerCoeff = 6.0f;
-    engineConfiguration->clt.config.bias_resistor = 2490;
-    engineConfiguration->iat.config.bias_resistor = 2490;
-
+    /* Analog Scaling, Oil Pressure & Thermistor Pull-Ups */  
+    engineConfiguration->clt.config.bias_resistor = 4700;
+    engineConfiguration->iat.config.bias_resistor = 4700;
+    engineConfiguration->auxTemp1.config.bias_resistor = 4700;
+	engineConfiguration->auxTemp2.config.bias_resistor = 4700;
+	
     engineConfiguration->oilPressure.v1 = 0.30f;
     engineConfiguration->oilPressure.value1 = 0.0f;
     engineConfiguration->oilPressure.v2 = 2.70f;
@@ -94,7 +114,6 @@ static void customBoardDefaultConfiguration() {
 }
 
 void setup_custom_board_overrides() {
-    //setupBoardHardwareTestOverrides();
     custom_board_InitHardware = customBoardInitHardware;
     custom_board_ConfigOverrides = customBoardConfigOverrides;
     custom_board_DefaultConfiguration = customBoardDefaultConfiguration;
