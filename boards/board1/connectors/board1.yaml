@@ -50,13 +50,13 @@ pins:
     class: [switch_inputs, event_inputs]
     ts_name: Input 2 (PB7)
   
+  - id: [B8, B8]
+    class: [switch_inputs, event_inputs]
+    ts_name: Input 3 (PB8)
+  
   - id: [B9, B9]
     class: [switch_inputs, event_inputs]
-    ts_name: Input 3 (PB9)
-  
-  - id: [C3, C3]
-    class: [switch_inputs, event_inputs]
-    ts_name: Input 4 (PC3)
+    ts_name: Input 4 (PB9)
     
   - id: [E0, E0]
     class: [switch_inputs, event_inputs]
