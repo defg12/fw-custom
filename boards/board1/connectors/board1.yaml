@@ -27,7 +27,7 @@ pins:
   
   - id: EFI_ADC_10
     class: analog_inputs
-    ts_name: Aux ADC (PC0)
+    ts_name: Temp ADC (PC0)
   
   - id: EFI_ADC_11
     class: analog_inputs
@@ -35,7 +35,7 @@ pins:
   
   - id: EFI_ADC_12
     class: analog_inputs
-    ts_name: Aux ADC (PC2)
+    ts_name: Temp ADC (PC2)
   
   - id: EFI_ADC_14
     class: analog_inputs
@@ -45,7 +45,7 @@ pins:
     class: analog_inputs
     ts_name: IAT (PC5)
   
-  # Digital Switch & Trigger / Event Inputs (Only E0, E1, B9, C3, B5, B7)
+  # Digital Switch & Trigger / Event Inputs
   - id: [B5, B5]
     class: [switch_inputs, event_inputs]
     ts_name: Input 1 (PB5)
@@ -101,7 +101,7 @@ pins:
   
   - id: E4
     class: outputs
-    ts_name: OUT 1 (PE4)
+    ts_name: Aux Out (PE4)
   
   - id: E5
     class: outputs
