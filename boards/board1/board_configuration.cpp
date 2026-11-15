@@ -65,7 +65,7 @@ static void setDefaultInjectorPins() {
 }
 
 static void setDefaultEtbPins() {
-    engineConfiguration->etbIo[0].directionPin = Gpio::D7; // ETB Direction (PD7)
+    engineConfiguration->etbIo[0].directionPin1 = Gpio::D7; // ETB Direction (PD7)
     engineConfiguration->etbIo[0].controlPin = Gpio::B4;  // ETB PWM (PB4)
     engineConfiguration->etbIo[0].disablePin = Gpio::B6;  // ETB Enable/Disable (PB6)
     engineConfiguration->etb_use_two_wires = false;
@@ -86,15 +86,15 @@ static void customBoardDefaultConfiguration() {
     engineConfiguration->tps1_1AdcChannel = EFI_ADC_1;      // PA1
     engineConfiguration->oilPressure.hwChannel = EFI_ADC_2; // PA2
     engineConfiguration->map.sensor.hwChannel = EFI_ADC_3;  // PA3
-    engineConfiguration->auxTemp1.adcChannel = EFI_ADC_10; // PC0
-	engineConfiguration->auxTemp2.adcChannel = EFI_ADC_12; // PC2
+    engineConfiguration->auxTempSensor1.adcChannel = EFI_ADC_10; // PC0
+	engineConfiguration->auxTempSensor2.adcChannel = EFI_ADC_12; // PC2
 	engineConfiguration->iat.adcChannel = EFI_ADC_15;       // PC5
 
     /* Analog Scaling, Oil Pressure & Thermistor Pull-Ups */  
     engineConfiguration->clt.config.bias_resistor = 4700;
     engineConfiguration->iat.config.bias_resistor = 4700;
-    engineConfiguration->auxTemp1.config.bias_resistor = 4700;
-	engineConfiguration->auxTemp2.config.bias_resistor = 4700;
+    engineConfiguration->auxTempSensor1.config.bias_resistor = 4700;
+	engineConfiguration->auxTempSensor2.config.bias_resistor = 4700;
 	
     engineConfiguration->oilPressure.v1 = 0.30f;
     engineConfiguration->oilPressure.value1 = 0.0f;
