@@ -41,12 +41,12 @@ static void customBoardConfigOverrides() {
     engineConfiguration->sdCardSpiDevice = SPI_NONE;
 
 	/* Hardcode PB5 (Cam / VR trigger input) on every boot */
-    engineConfiguration->triggerInputPins = Gpio::B5; // Primary crank trigger  (PB4)
-    engineConfiguration->triggerInputPins = Gpio::Unassigned;
+    engineConfiguration->triggerInputPins[0] = Gpio::B5; // Primary crank trigger  (PB4)
+    engineConfiguration->triggerInputPins[1] = Gpio::Unassigned;
 
     /* Hardcode ETB H-Bridge pins on every boot (Dir + PWM + Disable) */
     engineConfiguration->etbIo[0].directionPin1 = Gpio::D7; // ETB Direction (PD7)
-    engineConfiguration->etbIo[0].controlPin1 = Gpio::C6;   // ETB PWM (PC6)
+    engineConfiguration->etbIo[0].controlPin = Gpio::C6;   // ETB PWM (PC6)
     engineConfiguration->etbIo[0].disablePin = Gpio::B6;    // ETB Disable (PB6)
     engineConfiguration->etb_use_two_wires = false;
 }
