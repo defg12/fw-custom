@@ -31,7 +31,7 @@ static void customBoardInitHardware() {
 
 static void customBoardConfigOverrides() {
     /* Force SkyStar PRO REF3030 3.00V precision ADC reference */
-    engineConfiguration->adcVcc = 3.0f;
+    engineConfiguration->adcVcc = 3.3f;
     engineConfiguration->vbattAdcChannel = EFI_ADC_8; // PB0
 	engineConfiguration->vbattDividerCoeff = 11.0f;
 	
