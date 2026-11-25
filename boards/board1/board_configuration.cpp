@@ -30,7 +30,7 @@ static void customBoardInitHardware() {
 }
 
 static void customBoardConfigOverrides() {
-    /* Force SkyStar PRO REF3030 3.00V precision ADC reference */
+    /* Force SkyStar PRO REF3033 3.3V precision ADC reference */
     engineConfiguration->adcVcc = 3.3f;
     engineConfiguration->vbattAdcChannel = EFI_ADC_8; // PB0
 	engineConfiguration->vbattDividerCoeff = 11.0f;
@@ -83,7 +83,7 @@ static void customBoardDefaultConfiguration() {
     /* Crank & Cam Trigger Inputs */
     engineConfiguration->camInputs[0] = Gpio::B4;           // Primary cam trigger
 	
-    /* Analog Sensors (Strictly 0-3.0V max on SkyStar PRO) */
+    /* Analog Sensors (Strictly 0-3.3V max on SkyStar PRO) */
     engineConfiguration->clt.adcChannel = EFI_ADC_0;        // PA0
     engineConfiguration->tps1_1AdcChannel = EFI_ADC_1;      // PA1
     engineConfiguration->oilPressure.hwChannel = EFI_ADC_2; // PA2
@@ -93,7 +93,8 @@ static void customBoardDefaultConfiguration() {
 	engineConfiguration->auxLinear2.hwChannel = EFI_ADC_11;
 	engineConfiguration->auxTempSensor2.adcChannel = EFI_ADC_12; // PC2
 	engineConfiguration->iat.adcChannel = EFI_ADC_15;       // PC5
-
+    engineConfiguration->analogInputDividerCoefficient = (4.7f + 6.8f) / 6.8f; // 1.691176f
+	
     /* Analog Scaling, Oil Pressure & Thermistor Pull-Ups */  
     engineConfiguration->clt.config.bias_resistor = 4700;
     engineConfiguration->iat.config.bias_resistor = 4700;
